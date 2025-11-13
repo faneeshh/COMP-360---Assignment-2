@@ -1,0 +1,208 @@
+[gd_scene load_steps=26 format=3 uid="uid://cp2p305cdiccd"]
+
+[ext_resource type="Script" uid="uid://cv8f0gunxluo" path="res://track_root.gd" id="1_vvh5c"]
+[ext_resource type="Script" uid="uid://cjgjafxopg8wl" path="res://track_path.gd" id="2_28aoi"]
+[ext_resource type="Script" uid="uid://cxsfdfp8v623g" path="res://ai.gd" id="3_huihk"]
+[ext_resource type="Script" uid="uid://dhu4x81fda5kb" path="res://landscape.gd" id="3_jnlp7"]
+[ext_resource type="Texture2D" uid="uid://dlcaky8ada7ol" path="res://heightmap.png" id="4_28aoi"]
+[ext_resource type="Script" uid="uid://btg1c3rtcinst" path="res://trees.gd" id="5_jnlp7"]
+[ext_resource type="ArrayMesh" uid="uid://bs0qqi1eap0c1" path="res://Lowpoly_tree_sample.obj" id="6_l8v81"]
+[ext_resource type="Script" uid="uid://sgfocfy1eaax" path="res://car_camera.gd" id="8_bf3um"]
+[ext_resource type="Script" uid="uid://cean0fcygux7e" path="res://player.gd" id="8_huihk"]
+
+[sub_resource type="Curve3D" id="Curve3D_vho56"]
+closed = true
+bake_interval = 0.25
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_vyht1"]
+size = Vector3(1.4517822, 0.6575012, 1.9907837)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vho56"]
+albedo_color = Color(1, 0, 0, 1)
+metallic = 0.3
+roughness = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_pq8q7"]
+material = SubResource("StandardMaterial3D_vho56")
+size = Vector3(1, 0.5, 2)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_l8v81"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tw3kd"]
+albedo_color = Color(0.14767182, 0.14767179, 0.14767179, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_28aoi"]
+sky_top_color = Color(0.28627452, 0.49803922, 1, 1)
+sky_horizon_color = Color(0.5372549, 0.7176471, 1, 1)
+ground_bottom_color = Color(0.29411766, 0.48235294, 0.24705882, 1)
+ground_horizon_color = Color(0.29411766, 0.48235294, 0.24705882, 1)
+use_debanding = false
+
+[sub_resource type="Sky" id="Sky_jnlp7"]
+sky_material = SubResource("ProceduralSkyMaterial_28aoi")
+
+[sub_resource type="Environment" id="Environment_28aoi"]
+background_mode = 2
+sky = SubResource("Sky_jnlp7")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+tonemap_mode = 3
+ssao_radius = 0.3
+ssao_power = 1.0245302
+glow_enabled = true
+glow_intensity = 0.5
+fog_mode = 1
+fog_light_color = Color(0.5516223, 0.69817996, 0.39088923, 1)
+fog_density = 0.0012
+fog_sky_affect = 0.8
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_28aoi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vyht1"]
+albedo_color = Color(0.3882353, 0.25882354, 0.15294118, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bf3um"]
+albedo_color = Color(0.41568628, 0.27450982, 0.12156863, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_l8v81"]
+albedo_color = Color(0.33333334, 0.28627452, 0.13333334, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_huihk"]
+albedo_color = Color(0.36078432, 0.28235295, 0.15294118, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_tw3kd"]
+size = Vector3(1.8222656, 1.3687744, 2.3284607)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gd4vy"]
+albedo_color = Color(0, 0.49991554, 0.5008341, 1)
+
+[node name="Root" type="Node3D"]
+script = ExtResource("1_vvh5c")
+road_width = 5.0
+
+[node name="TrackPath" type="Path3D" parent="."]
+curve = SubResource("Curve3D_vho56")
+script = ExtResource("2_28aoi")
+
+[node name="CarFollow" type="PathFollow3D" parent="TrackPath"]
+rotation_mode = 4
+
+[node name="AI" type="RigidBody3D" parent="TrackPath/CarFollow"]
+gravity_scale = 0.0
+script = ExtResource("3_huihk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TrackPath/CarFollow/AI"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02947998, 0.6417968, 0.051162124)
+shape = SubResource("BoxShape3D_vyht1")
+
+[node name="CarMesh" type="MeshInstance3D" parent="TrackPath/CarFollow/AI"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.02964592, 0.7146745, 0.041199684)
+mesh = SubResource("BoxMesh_pq8q7")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TrackPath/CarFollow/AI/CarMesh"]
+transform = Transform3D(-1.9670125e-08, 0.1, 0, -0.45, -4.371139e-09, 0, 0, 0, 0.45, 0.6, -0.11, 0.619)
+mesh = SubResource("CylinderMesh_l8v81")
+surface_material_override/0 = SubResource("StandardMaterial3D_tw3kd")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="TrackPath/CarFollow/AI/CarMesh"]
+transform = Transform3D(-1.9670125e-08, 0.1, 0, -0.45, -4.371139e-09, 0, 0, 0, 0.45, 0.6, -0.11, -0.619)
+mesh = SubResource("CylinderMesh_l8v81")
+surface_material_override/0 = SubResource("StandardMaterial3D_tw3kd")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="TrackPath/CarFollow/AI/CarMesh"]
+transform = Transform3D(-1.9670125e-08, 0.1, 0, -0.45, -4.371139e-09, 0, 0, 0, 0.45, -0.6, -0.11, 0.619)
+mesh = SubResource("CylinderMesh_l8v81")
+surface_material_override/0 = SubResource("StandardMaterial3D_tw3kd")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="TrackPath/CarFollow/AI/CarMesh"]
+transform = Transform3D(-1.9670125e-08, 0.1, 0, -0.45, -4.371139e-09, 0, 0, 0, 0.45, -0.6, -0.11, -0.619)
+mesh = SubResource("CylinderMesh_l8v81")
+surface_material_override/0 = SubResource("StandardMaterial3D_tw3kd")
+
+[node name="Landscape" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+script = ExtResource("3_jnlp7")
+grid = 512
+height_scale = 20.0
+heightmap = ExtResource("4_28aoi")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.85026866, -0.5173786, 0.09676102, 0.15417244, 0.42057827, 0.89406085, -0.5032636, -0.74527395, 0.43737, -1.779489, -2.2177806, -3.875019)
+light_color = Color(1, 0.96862745, 0.9098039, 1)
+shadow_bias = 0.05
+shadow_normal_bias = 0.4
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="SpeedLabel" type="Label" parent="UI"]
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_28aoi")
+camera_attributes = SubResource("CameraAttributesPractical_28aoi")
+
+[node name="tree" type="Node3D" parent="."]
+script = ExtResource("5_jnlp7")
+area_size = Vector2(100, 100)
+
+[node name="LowpolyTreeSample" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -2.4252973, 0, -3.490816)
+mesh = ExtResource("6_l8v81")
+surface_material_override/0 = SubResource("StandardMaterial3D_vyht1")
+
+[node name="LowpolyTreeSample2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 9.524302, 0, 5.5386057)
+mesh = ExtResource("6_l8v81")
+surface_material_override/0 = SubResource("StandardMaterial3D_bf3um")
+
+[node name="LowpolyTreeSample3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.123, 0, 0, 0, 0.35, 0, 0, 0, 0.35, -7.9371014, 0, 5.67342)
+mesh = ExtResource("6_l8v81")
+surface_material_override/0 = SubResource("StandardMaterial3D_l8v81")
+
+[node name="LowpolyTreeSample4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 5.487418, -4.7683716e-07, -12.824249)
+mesh = ExtResource("6_l8v81")
+surface_material_override/0 = SubResource("StandardMaterial3D_huihk")
+
+[node name="Player" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8961747, 0.73346454, 1.0682358)
+gravity_scale = 0.0
+script = ExtResource("8_huihk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42663598, 0.17656994, -1.0217128)
+shape = SubResource("BoxShape3D_tw3kd")
+debug_color = Color(0.5490434, 0.4028604, 1, 0.41960785)
+
+[node name="CarMesh" type="MeshInstance3D" parent="Player/CollisionShape3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.029999971, -0.10588664, 0.041)
+mesh = SubResource("BoxMesh_pq8q7")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_gd4vy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/CollisionShape3D/CarMesh"]
+transform = Transform3D(-1.9670125e-08, 0.1, 0, -0.45, -4.371139e-09, 0, 0, 0, 0.45, 0.6, -0.11, 0.619)
+mesh = SubResource("CylinderMesh_l8v81")
+surface_material_override/0 = SubResource("StandardMaterial3D_tw3kd")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Player/CollisionShape3D/CarMesh"]
+transform = Transform3D(-1.9670125e-08, 0.1, 0, -0.45, -4.371139e-09, 0, 0, 0, 0.45, 0.6, -0.11, -0.619)
+mesh = SubResource("CylinderMesh_l8v81")
+surface_material_override/0 = SubResource("StandardMaterial3D_tw3kd")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Player/CollisionShape3D/CarMesh"]
+transform = Transform3D(-1.9670125e-08, 0.1, 0, -0.45, -4.371139e-09, 0, 0, 0, 0.45, -0.6, -0.11, 0.619)
+mesh = SubResource("CylinderMesh_l8v81")
+surface_material_override/0 = SubResource("StandardMaterial3D_tw3kd")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Player/CollisionShape3D/CarMesh"]
+transform = Transform3D(-1.9670125e-08, 0.1, 0, -0.45, -4.371139e-09, 0, 0, 0, 0.45, -0.6, -0.11, -0.619)
+mesh = SubResource("CylinderMesh_l8v81")
+surface_material_override/0 = SubResource("StandardMaterial3D_tw3kd")
+
+[node name="CarCamera" type="Camera3D" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("8_bf3um")
+target = NodePath("../Player")
