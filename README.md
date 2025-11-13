@@ -48,7 +48,7 @@ It demonstrates techniques in terrain generation, object scattering, mesh creati
 | Iteration 5 | Environment        | Added trees, lighting, and skybox                                    | ✅      |
 | Iteration 6 | Debugging & Polish | Fixed physics jitter, tuned camera smoothing, prepared documentation | ✅      |
 
-> **Work tracking:** Logged through Git commits and a shared Trello/Kanban board used by all four members.
+> **Work tracking:** Logged through Discord Chats and in person meetings.
 
 ---
 
@@ -60,7 +60,7 @@ It demonstrates techniques in terrain generation, object scattering, mesh creati
 | **Faneesh** | Implemented dynamic camera follow system, lighting setup, and handled scene material optimization. Assisted with vehicle control script refinement.                                         |
 | **Mihir**   | Focused on procedural terrain generation using OpenSimplexNoise, tree placement logic, and heightmap tuning for stability.                                                                  |
 | **Prasoon** | Designed vehicle physics parameters, improved car handling and responsiveness, and integrated camera and player control system.                                                             |
-| **Faneesh** | Coordinated testing, performed debugging passes, collected screenshots and logs, and documented performance observations for final report.                                                  |
+| **Group Work** | Coordinated testing, performed debugging passes, collected screenshots and logs, and documented performance observations for final report.                                                  |
 
 ---
 
@@ -91,7 +91,7 @@ It demonstrates techniques in terrain generation, object scattering, mesh creati
 
 ##  Authors
 
-**Willow**, **Faneesh**, **Mihir**, **Prasoon**, **Satveer**
+**Faneesh**, **Mihir**, **Prasoon**, **Satveer**
 Course: *COMP 360 – Computer Graphics*
 Instructor: *Russell Campbell*
 University of the Fraser Valley
