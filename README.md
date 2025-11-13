@@ -57,9 +57,9 @@ It demonstrates techniques in terrain generation, object scattering, mesh creati
 | Team Member | Contributions                                                                                                                                                                               |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Satveer**  | Project setup and architecture, procedural racetrack generation using Curve3D, terrain integration, and AI path-follow system. Handled debugging of path smoothing and AI collision issues. |
-| **Faneesh** | Implemented dynamic camera follow system, lighting setup, and handled scene material optimization. Assisted with vehicle control script refinement.                                         |
+| **Faneesh & Mihir** | Implemented dynamic camera follow system, lighting setup, and handled scene material optimization. Assisted with vehicle control script refinement.                                         |
 | **Mihir**   | Focused on procedural terrain generation using OpenSimplexNoise, tree placement logic, and heightmap tuning for stability.                                                                  |
-| **Prasoon** | Designed vehicle physics parameters, improved car handling and responsiveness, and integrated camera and player control system.                                                             |
+| **Mihir & Prasoon** | Designed vehicle physics parameters, improved car handling and responsiveness, and integrated camera and player control system.                                                             |
 | **Group Work** | Coordinated testing, performed debugging passes, collected screenshots and logs, and documented performance observations for final report.                                                  |
 
 ---
